@@ -25,7 +25,7 @@ Mask-based workflow for correcting local areas, refining geometry, and improving
 ## Repository structure
 
 - [Workflows](./workflows) — exported ComfyUI JSON workflows
-- `examples/` — generated output examples
+- [Examples](./examples) — generated output examples
 - `screenshots/` — screenshots of node-based workflow setups
 
 ## Notes
