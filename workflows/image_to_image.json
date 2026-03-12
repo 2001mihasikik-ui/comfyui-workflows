@@ -1,0 +1,1041 @@
+{
+  "id": "b152841b-dbf3-4b47-92b4-14132d051321",
+  "revision": 0,
+  "last_node_id": 37,
+  "last_link_id": 66,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2316.436354258101,
+        -36.21700792577997
+      ],
+      "size": [
+        400,
+        88
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode Neg",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "people, pedestrians, crowd, person, human, humans, silhouettes, cyclists, bikes, visitors, street activity, trees, branches, leaves, bushes, planters, flower beds, benches, umbrellas, cars, facade distortion, warped architecture, broken windows, extra floors, asymmetry, messy street clutter, cheap materials, rustic facade, random balconies, low quality, blurry, noisy, cartoon, illustration, oversaturated, deformed perspective"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        3679.663426140938,
+        558.6413293145876
+      ],
+      "size": [
+        187.5,
+        46
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 9
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "VAEEncode",
+      "pos": [
+        4093.599628645186,
+        435.6176011934621
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 11
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 15,
+      "type": "VAEDecode",
+      "pos": [
+        4884.719574934248,
+        462.89755419639175
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 20
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "SaveImage",
+      "pos": [
+        5212.291530414508,
+        478.64678651229696
+      ],
+      "size": [
+        270,
+        270.00000000000006
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 22
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "KSampler",
+      "pos": [
+        4424.479615217452,
+        437.3775743379933
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 26
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 27
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 28
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        276993627622454,
+        "randomize",
+        25,
+        4,
+        "dpmpp_2m_sde_gpu",
+        "karras",
+        0.15
+      ]
+    },
+    {
+      "id": 37,
+      "type": "VAEEncode",
+      "pos": [
+        2804.5759692117863,
+        841.0260164674613
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 63
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 65
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            64
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      }
+    },
+    {
+      "id": 6,
+      "type": "LoadImage",
+      "pos": [
+        1755.9287723104342,
+        691.9808465371732
+      ],
+      "size": [
+        282.798828125,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            5,
+            63
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "image": "clipspace/clipspace-painted-masked-1773258382980.png [input]"
+      },
+      "widgets_values": [
+        "Gallery of KN Next Office Building _ SARC Architects  - 1.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LeReS-DepthMapPreprocessor",
+      "pos": [
+        2155.662418563333,
+        372.8996676660638
+      ],
+      "size": [
+        395.23984375,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LeReS-DepthMapPreprocessor"
+      },
+      "widgets_values": [
+        0,
+        0,
+        "enable",
+        1024
+      ]
+    },
+    {
+      "id": 13,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3842.2490079367544,
+        -83.35875568916236
+      ],
+      "size": [
+        400,
+        88
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode Pos",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "high detail brick facade, sharp brick edges, realistic mortar joints, crisp architectural details, clean textures, photorealistic architectural photography, ultra sharp focus, high clarity"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 14,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3840.7236021365848,
+        45.11232577255356
+      ],
+      "size": [
+        400,
+        88
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode Neg",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "people, pedestrians, cars, graffiti, posters, signs, deformation, melted bricks, warped walls, distorted architecture, blur, low quality, oversharpen, noise"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 12,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        3340.8429654802894,
+        114.91020652465258
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            26
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            18,
+            19
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12,
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "architecturerealmix_v11.safetensors"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "ControlNetLoader",
+      "pos": [
+        1624.8193021936029,
+        213.56931021578976
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "control_v11f1p_sd15_depth.pth"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        2625.3878771012933,
+        228.57715845484992
+      ],
+      "size": [
+        270,
+        186
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 2
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 4
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 66
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.65,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1608.8089195661362,
+        39.535073792673245
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            10,
+            65,
+            66
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "architecturerealmix_v11.safetensors"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [
+        3258.3739532138634,
+        667.3661990798307
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 16
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 64
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        285917398143285,
+        "randomize",
+        32,
+        8,
+        "dpmpp_2m",
+        "karras",
+        0.35
+      ]
+    },
+    {
+      "id": 5,
+      "type": "LoraLoader",
+      "pos": [
+        1917.522544809448,
+        37.99477223842888
+      ],
+      "size": [
+        290.4380859375,
+        126
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            6,
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "FLUX_BrickAesthetic.safetensors",
+        0.7,
+        0.9
+      ]
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2317.9617600582706,
+        -164.688089387496
+      ],
+      "size": [
+        400,
+        88
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode Pos",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "classic european restaurant building, premium handmade clay bricks, warm red and brown brick facade, subtle color variation in bricks, realistic mortar joints, european masonry pattern, architectural photography, sharp facade details, photorealistic"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      1,
+      10,
+      0,
+      2,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      2,
+      4,
+      0,
+      2,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      3,
+      1,
+      0,
+      2,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      4,
+      3,
+      0,
+      2,
+      3,
+      "IMAGE"
+    ],
+    [
+      5,
+      6,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      5,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      7,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      7,
+      1,
+      5,
+      1,
+      "CLIP"
+    ],
+    [
+      9,
+      11,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      10,
+      7,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      12,
+      2,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      13,
+      5,
+      1,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      14,
+      5,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      2,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      2,
+      1,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      12,
+      1,
+      13,
+      0,
+      "CLIP"
+    ],
+    [
+      19,
+      12,
+      1,
+      14,
+      0,
+      "CLIP"
+    ],
+    [
+      20,
+      18,
+      0,
+      15,
+      0,
+      "LATENT"
+    ],
+    [
+      21,
+      12,
+      2,
+      15,
+      1,
+      "VAE"
+    ],
+    [
+      22,
+      15,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      26,
+      12,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      27,
+      13,
+      0,
+      18,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      28,
+      14,
+      0,
+      18,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      29,
+      9,
+      0,
+      18,
+      3,
+      "LATENT"
+    ],
+    [
+      63,
+      6,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      64,
+      37,
+      0,
+      11,
+      3,
+      "LATENT"
+    ],
+    [
+      65,
+      7,
+      2,
+      37,
+      1,
+      "VAE"
+    ],
+    [
+      66,
+      7,
+      2,
+      2,
+      4,
+      "VAE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": [
+        -1406.5178288246782,
+        366.22382286375637
+      ]
+    },
+    "frontendVersion": "1.39.19"
+  },
+  "version": 0.4
+}
